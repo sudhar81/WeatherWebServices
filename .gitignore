@@ -365,6 +365,8 @@ FodyWeavers.xsd
 
 # Ignore the actual config file
 appsettings.json
+appsettings.Development.json
+
 
 # But do NOT ignore the template
 !appsettings.Example.json
