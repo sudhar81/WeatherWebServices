@@ -46,6 +46,23 @@ var connectionString = builder.Configuration.GetConnectionString("WeatherDBConne
 // Bind the "WeatherApi" section from appsettings.json to the WeatherSettings class
 builder.Services.Configure<WeatherSettings>(builder.Configuration.GetSection("WeatherApi"));
 
+
+
+// Register the repository with the connection string
+builder.Services.AddScoped<WeatherForecastRepository>(provider =>
+    new WeatherForecastRepository(connectionString));
+
+
+
+// Register the repository with the connection string
+builder.Services.AddSingleton<IWeatherForecastRepository, WeatherForecastRepository>(provider =>
+    new WeatherForecastRepository(connectionString));
+
+// Register the repository with the connection string
+builder.Services.AddScoped<WeatherReadingsRepository>(provider =>
+    new WeatherReadingsRepository(connectionString));
+
+
 // Register Service
 builder.Services.AddHttpClient<WeatherReadingsService>();
 
@@ -55,17 +72,7 @@ builder.Services.AddHttpClient<WeatherForecastService>();
 
 
 // Register the repository with the connection string
-builder.Services.AddScoped<WeatherForecastRepository>(provider =>
-    new WeatherForecastRepository(connectionString));
-
-
-// Register the repository with the connection string
-builder.Services.AddScoped<WeatherReadingsRepository>(provider =>
-    new WeatherReadingsRepository(connectionString));
-
-
-// Register the repository with the connection string
-builder.Services.AddScoped<BackgroundDataFetchServices>();
+builder.Services.AddHostedService<BackgroundDataFetchServices>();
 
 // Add services to the container.
 

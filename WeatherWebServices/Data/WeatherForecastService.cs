@@ -11,11 +11,11 @@ namespace WeatherWebServices.Data
     public class WeatherForecastService
     {
         private readonly HttpClient _httpClient;
-        private readonly WeatherForecastRepository _repository;
+        private readonly IWeatherForecastRepository _repository;
         private readonly ILogger<WeatherForecastService> _logger;
         private readonly WeatherSettings _settings;
  
-        public WeatherForecastService(HttpClient httpClient, WeatherForecastRepository repository, ILogger<WeatherForecastService> logger, IOptions<WeatherSettings> options)
+        public WeatherForecastService(HttpClient httpClient, IWeatherForecastRepository repository, ILogger<WeatherForecastService> logger, IOptions<WeatherSettings> options)
         {
             _httpClient = httpClient;
             _repository = repository;

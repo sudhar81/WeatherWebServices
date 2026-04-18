@@ -10,26 +10,28 @@ namespace WeatherWebServices.Data
         private readonly ILogger<BackgroundDataFetchServices> _logger;
 
         private readonly WeatherForecastService _weatherService;
-        private readonly WeatherForecastRepository _repository;
+      
 
         public BackgroundDataFetchServices(ILogger<BackgroundDataFetchServices> logger, 
-            WeatherForecastService weatherService, WeatherForecastRepository repository)
+            WeatherForecastService weatherService)
         {
 
             _logger = logger;
             _weatherService = weatherService;
-            _repository = repository;
+           
         }
 
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
+            Console.WriteLine("Background Service is Started.");
             _logger.LogInformation("Service Started");
             return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            Console.WriteLine("Background Service is Stopped.");
             _logger.LogInformation("Service Stopped");
 
             return Task.CompletedTask;
@@ -38,16 +40,31 @@ namespace WeatherWebServices.Data
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            System.Console.WriteLine("Background Service is running.");    
+
+
+
+
             string curDate = DateTime.Today.ToString("yyyy-MM-dd");
-            try
+
+            while (!stoppingToken.IsCancellationRequested)
             {
-                await _weatherService.SyncAndTriggerAlert(curDate);
+                try
+                {
+                    await _weatherService.SyncAndTriggerAlert("");
+                }
+                catch (Exception ex)
+                {
+                    // Log the error so the loop can continue to the next interval
+                    _logger.LogError(ex, "Error occurred during execution. Retrying in next interval.");
+                }
+
+                // The loop will stay here until the timer finishes
+                await Task.Delay(TimeSpan.FromHours(1), stoppingToken);
+
+                //await Task.Delay(6000, stoppingToken);
             }
-            catch
-            { }
-
-
-            await Task.Delay(60000, stoppingToken);
         }
     }
+    
 }

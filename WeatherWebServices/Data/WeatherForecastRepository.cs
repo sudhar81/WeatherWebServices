@@ -5,8 +5,8 @@ using WeatherWebServices.Models;
 
 namespace WeatherWebServices.Data
 {
-    public class WeatherForecastRepository
-    {
+    public class WeatherForecastRepository :  IWeatherForecastRepository
+        {
         private readonly string _connectionString;
 
         public WeatherForecastRepository(string connectionString)
@@ -115,8 +115,8 @@ namespace WeatherWebServices.Data
                     ValidperiodEnd,ValidPeriodText, WindSpeedHigh, WindSpeedLow,wf.WindDirection,UpdatedTimeStamp,
                     RegionName,rf.Forecastcode,rf.ForecastText,StartTime,EndTime,TimePeriodText
                     from 
-                    WeatherForecasts wf,RegionalForecasts rf
-                    where wf.id=rf.MainForecastId and wf.ForecastDate=@FetchDate   and (rf.RegionName=@RegionName or @RegionName IS NULL)";
+                    WeatherForecasts wf inner join RegionalForecasts rf on wf.id=rf.MainForecastId
+                    where  wf.ForecastDate=@FetchDate   and (rf.RegionName=@RegionName or @RegionName IS NULL)";
 
                 var Params = new
                 {
