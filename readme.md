@@ -38,6 +38,18 @@ Background services to fetch, process, and evaluate weather data
   "DefaultConnection": "Server=localhost;Database=YourDB;Trusted_Connection=True;"
   }
 
+- Register at: https://data.gov.sg/
+
+  Generate your API key
+
+  Navigate to appsettings.json and update the WeatherApi section to upate your api key.
+
+  JSON
+  "WeatherApi": {
+  "BaseUrl":
+  "ApiKey": "YOUR_API_KEY_HERE"
+  }
+
 ### Database
 
 - Open /scripts/initial_database_script.sql
