@@ -7,7 +7,7 @@ using System.Text;
 
 namespace WeatherWebServices.Data
 {
-   
+
     public class TokenService(IConfiguration config)
     {
         public string GenerateToken(string username, string role)
@@ -32,5 +32,14 @@ namespace WeatherWebServices.Data
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        public string EncryptPassword(string password)
+        {
+
+            string addon = "tEmpature_TEst_PAssword";
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(password + addon);
+            return Convert.ToBase64String(bytes);
+        }
     }
+   
 }

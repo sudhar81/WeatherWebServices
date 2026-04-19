@@ -40,9 +40,8 @@ namespace WeatherWebServices.Data
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            System.Console.WriteLine("Background Service is running.");    
 
-
+            //Execute the task immediately when the service starts & then every hour after that
 
 
             string curDate = DateTime.Today.ToString("yyyy-MM-dd");
@@ -59,10 +58,10 @@ namespace WeatherWebServices.Data
                     _logger.LogError(ex, "Error occurred during execution. Retrying in next interval.");
                 }
 
-                // The loop will stay here until the timer finishes
+                 
                 await Task.Delay(TimeSpan.FromHours(1), stoppingToken);
 
-                //await Task.Delay(6000, stoppingToken);
+                
             }
         }
     }

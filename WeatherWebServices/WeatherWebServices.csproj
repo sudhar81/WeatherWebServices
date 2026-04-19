@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="appsettings.Development.json.bak" />
+    <None Include="appsettings.Development.json" />
   </ItemGroup>
 
   <ItemGroup>

@@ -15,13 +15,15 @@ namespace WeatherWebServices.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] Login request)
         {
-            // Replace this with real database validation
-            if (request.Username == "admin" && request.Password == "password123")
+           
+            if (request.Username == "admin" && tokenService.EncryptPassword(request.Password) == "cGFzc3dvcmQxMjN0RW1wYXR1cmVfVEVzdF9QQXNzd29yZA==")
             {
                 var token = tokenService.GenerateToken(request.Username, "Admin");
                 return Ok(new { Token = token });
             }
             return Unauthorized();
         }
+
+
     }
 }
