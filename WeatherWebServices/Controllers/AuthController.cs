@@ -12,7 +12,7 @@ namespace WeatherWebServices.Controllers
     public class AuthController(TokenService tokenService) : ControllerBase
     {
 
-        [HttpPost("login")]
+        [HttpPost("Token")]
         public IActionResult Login([FromBody] Login request)
         {
            

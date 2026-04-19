@@ -74,8 +74,8 @@ namespace WeatherWebServices.Controllers
         }
 
 
-        [HttpGet("Date")]
-        public async Task<IActionResult> ForecastDate(string ForecastDate, string? RegionName)
+        [HttpGet("History")]
+        public async Task<IActionResult> ForecastHistory(string ForecastDate, string? RegionName)
         {
             string format = "yyyy-MM-dd";
             try
