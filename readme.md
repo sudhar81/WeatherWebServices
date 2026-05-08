@@ -57,7 +57,7 @@ Background services to fetch, process, and evaluate weather data
 - Open /scripts/Initial_data_WeatherStation_Master_table_script.sql
 - Execute the script to generate WeatherStation Master
 
-## ## API Endpoints
+#### API Endpoints
 
 | Method   | Endpoint                              | Description                                                                                            |
 | -------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------ |
